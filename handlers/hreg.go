@@ -47,7 +47,7 @@ func Reg(c echo.Context) error {
 	cookie.Value = strconv.Itoa(user.ID)
 	cookie.Expires = time.Now().Add(cookieExp)
 	c.SetCookie(cookie)
-	return c.Render(http.StatusOK, "home.html", "")
+	return c.Redirect(http.StatusSeeOther, "/home")
 }
 
 func Authorization(c echo.Context) error {

@@ -5,8 +5,8 @@ import (
 	"time"
 )
 
-//Ad объявления
 type (
+	//Ad объявления
 	Ad struct {
 		ID        int
 		Comment   string `form:"comment"`
@@ -14,7 +14,7 @@ type (
 		Time      int    `form:"time"`
 		UserID    int    `sql:"user_id"`
 		Сategory  string `form:"category" sql:"category"`
-		Price     int    `form:"price"`
+		Price     int    `form:"price" sql:",notnull,default:0"`
 		CreatedAt time.Time
 	}
 	FilterData struct {
@@ -60,9 +60,11 @@ func (fd FilterData) GetFilterAds() ([]Ad, error) {
 	)
 	fd.Title = "%" + fd.Title + "%"
 	fd.Category = "%" + fd.Category + "%"
+	fmt.Println(fd.MinPrice)
 	if fd.MaxPrice == 0 {
 		fd.MaxPrice = 999999999
 	}
+
 	err := db.Model(&ads).
 		Where("title ILIKE ?", fd.Title).
 		Where("price <= ?", fd.MaxPrice).

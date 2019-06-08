@@ -1,3 +1,4 @@
+{{ template "header" .}}
 <h1>Войдите в систему или <a href="/signup">зарегистрируйтесь</a></h1>
 <font color="red">{{ .error }}</font>
 <form action="/auth" 
@@ -8,3 +9,4 @@ method="post" enctype="application/x-www-form-urlencoded">
 <input type="password" required name="password"/>
 <input type="submit"/> 
 </form>  
+{{ template "footer" .}} 

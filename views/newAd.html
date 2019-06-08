@@ -1,3 +1,4 @@
+{{ template "header" .}}
 <h1>Новое предложение</h1>
 
 <form action="/createAd" 
@@ -27,3 +28,4 @@ method="post" enctype="application/x-www-form-urlencoded">
 </textarea> <br>
 <input type="submit"/> 
 </form>
+{{ template "footer" .}} 

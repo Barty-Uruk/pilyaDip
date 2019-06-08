@@ -1,9 +1,10 @@
-
+{{ template "header" .}}
 <h1>Объявление №{{.ad.ID}}</h1>
 <h2> {{ .ad.Title }} </h2> 
 <p> Описание:{{ .ad.Comment }} </p>  
 <p> Время выполнения:{{ .ad.Time }} </p>   
-<p> Цена:{{ .ad.Price }} </p>  
+<p> Цена:{{ .ad.Price }} </p>
 <p> Телефон автора:{{ .user.Phone }} </p>    
 <p> Имя автора:{{ .user.Name }} </p>      
 </form>
+{{ template "footer" .}} 

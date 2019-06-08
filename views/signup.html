@@ -1,8 +1,8 @@
+{{ template "header" .}}
 <h1>Регистрация</h1>
-
 <form action="/reg" 
 method="post" enctype="application/x-www-form-urlencoded">
-введите логин
+введите логин 
 <input type="text" required name="login"/>
 введите пароль
 <input type="password"  required name="password"/>
@@ -12,3 +12,4 @@ method="post" enctype="application/x-www-form-urlencoded">
 <input type="text"  required name="phone"/>
 <input type="submit"/>
 </form>
+{{ template "footer" .}} 

@@ -14,6 +14,7 @@ func CreateAd(c echo.Context) error {
 	var (
 		ad models.Ad
 	)
+	ad.Price = 0
 	cookie, _ := c.Cookie("auth")
 	err := c.Bind(&ad)
 	if err != nil {

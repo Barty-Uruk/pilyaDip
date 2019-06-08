@@ -10,6 +10,7 @@ method="post" enctype="application/x-www-form-urlencoded">
 <input type="number" value="{{ .FilterData.MaxPrice}}" name="maxprice"/><br>
 Тип объявления<br> 
 <select selected="{{ .FilterData.Category}}" name="category"> 
+    <option value="" selected disabled hidden>Выберите тип</option>
     <option>IT, интернет, телеком</option>
     <option>Бытовые услуги</option>
     <option>Деловые услуги</option>
@@ -28,7 +29,7 @@ method="post" enctype="application/x-www-form-urlencoded">
 {{ range .Ads }} 
 <h1>  <li><b><a href="/ad/{{ .ID }}">{{ .Title }}</a> </b><br></h1>  
     Цена: {{ .Price}} 
-    Время выполнения: {{ .Time}}
+    Время выполнения: {{ .Time }}
  
     </li> 
 {{else}} 
