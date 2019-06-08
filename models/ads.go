@@ -12,7 +12,7 @@ type (
 		Comment   string `form:"comment"`
 		Title     string `form:"title"`
 		Time      int    `form:"time"`
-		UserID    int    `sql:"user_id"`
+		UserID    int    `sql:"user_id,notnull,default:0"`
 		Сategory  string `form:"category" sql:"category"`
 		Price     int    `form:"price" sql:",notnull,default:0"`
 		CreatedAt time.Time
@@ -31,6 +31,29 @@ func (ad Ad) Create() (Ad, error) {
 	_, err := db.Model(&ad).Insert()
 	if err != nil {
 		return ad, fmt.Errorf("Ошибка сохранения объявления в базу,%v", err)
+	}
+	return ad, nil
+}
+
+//Update обновляет объявление
+func (ad Ad) Update() (Ad, error) {
+
+	_, err := db.Model(&ad).WherePK().UpdateNotNull()
+	if err != nil {
+		return ad, fmt.Errorf("Ошибка обновления,%v", err)
+	}
+	return ad, nil
+}
+
+//DeleteAdByID удаляет объявление
+func DeleteAdByID(id int) (Ad, error) {
+	var (
+		ad Ad
+	)
+	ad.ID = id
+	_, err := db.Model(&ad).WherePK().Delete()
+	if err != nil {
+		return ad, fmt.Errorf("Ошибка удаления,%v", err)
 	}
 	return ad, nil
 }

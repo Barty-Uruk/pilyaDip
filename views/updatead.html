@@ -1,0 +1,29 @@
+{{ template "header" .}}
+<form action="/ad/{{ .ad.ID }}"  method="POST" enctype="application/x-www-form-urlencoded">
+Название<br> 
+<input type="text" value="{{ .ad.Title}}" size="46" required name="title"/><br>
+Цена<br>
+<input type="number" value="{{ .ad.Price}}" name="price"/><br>
+Время выполнения(минуты)<br> 
+<input type="number" value="{{ .ad.Time}}" name="time"/><br>
+Тип объявления<br> 
+<select  name="category"> 
+    <option value="" selected disabled hidden>Выберите тип</option>
+    <option>IT, интернет, телеком</option>
+    <option>Бытовые услуги</option>
+    <option>Деловые услуги</option>
+    <option>Искусство</option>
+    <option>Красота, здоровье</option>
+    <option>Курьерские поручения</option>
+    <option>Мастер на час</option>
+    <option>Няни, сиделки</option>
+    <option>Оборудование, производство</option>
+    <option>Обучение, курсы</option>
+    <option>Охрана, безопасность</option>
+   </select><br>   
+Комментарий<br> 
+<textarea value="{{ .ad.Comment}}" name="comment"/>  
+</textarea> <br>
+<input type="submit"/> 
+</form> 
+{{ template "footer" .}} 

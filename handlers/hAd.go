@@ -9,17 +9,40 @@ import (
 	"github.com/labstack/echo"
 )
 
+//UpdateAd обновляет предложение
+func UpdateAd(c echo.Context) error {
+	var (
+		ad models.Ad
+	)
+	id, _ := strconv.Atoi(c.Param("id"))
+	ad.ID = id
+	err := c.Bind(&ad)
+	if err != nil {
+		fmt.Println("error binding form date,", err)
+	}
+	newAd, err := ad.Update()
+	if err != nil {
+		msg := fmt.Errorf("error updating ad,%v", err)
+		fmt.Println(msg)
+		return c.Render(http.StatusBadRequest, "updatead.html", map[string]interface{}{
+			"error": "msg",
+		})
+	}
+	path := fmt.Sprintf("/ad/%v", newAd.ID)
+	return c.Redirect(http.StatusSeeOther, path)
+}
+
 //CreateAd создает новое предложение
 func CreateAd(c echo.Context) error {
 	var (
 		ad models.Ad
 	)
-	ad.Price = 0
 	cookie, _ := c.Cookie("auth")
 	err := c.Bind(&ad)
 	if err != nil {
 		fmt.Println("error binding form date,", err)
 	}
+	fmt.Println("---------------", cookie.Value)
 	ad.UserID, _ = strconv.Atoi(cookie.Value)
 	newAd, err := ad.Create()
 	if err != nil {
@@ -51,7 +74,27 @@ func GetAd(c echo.Context) error {
 		"user": user,
 	})
 }
+func DeleteAd(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	_, err := models.DeleteAdByID(id)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	return c.Redirect(http.StatusSeeOther, "/home")
+}
 
+func UpdatingAd(c echo.Context) error {
+	id, _ := strconv.Atoi(c.Param("id"))
+	ad, err := models.GetAdByID(id)
+	if err != nil {
+		fmt.Println(err)
+		return err
+	}
+	return c.Render(http.StatusOK, "updatead.html", map[string]interface{}{
+		"ad": ad,
+	})
+}
 func MyAds(c echo.Context) error {
 	cookie, _ := c.Cookie("auth")
 	userid, err := strconv.Atoi(cookie.Value)

@@ -3,7 +3,8 @@
 <h1>  <li><b><a href="/ad/{{ .ID }}">{{ .Title }}</a> </b><br></h1>  
     Цена: {{ .Price}}   
     Время выполнения: {{ .Time}}
- 
+    <a href="/updatead/{{ .ID }}">Изменить</a> 
+    <a href="/deletead/{{ .ID }}">Удалить</a> 
     </li> 
 {{else}} 
     <li><b>нет объявлений</b></li>
