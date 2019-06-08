@@ -13,7 +13,7 @@ type (
 		Title     string `form:"title"`
 		Time      int    `form:"time"`
 		UserID    int    `sql:"user_id,notnull,default:0"`
-		Сategory  string `form:"category" sql:"category"`
+		Category  string `form:"category" sql:"category"`
 		Price     int    `form:"price" sql:",notnull,default:0"`
 		CreatedAt time.Time
 	}
