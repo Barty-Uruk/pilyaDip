@@ -1,0 +1,39 @@
+{{ template "header" .}}
+
+<form action="/filterads" 
+method="post" enctype="application/x-www-form-urlencoded">
+Название<br>
+<input type="text"  value="{{ .FilterData.Title}}" size="46" name="title"/><br>
+Минимальная цена<br>
+<input type="number" value="{{ .FilterData.MinPrice}}"  name="minprice"/><br>
+Максимальная цена<br>
+<input type="number" value="{{ .FilterData.MaxPrice}}" name="maxprice"/><br>
+Тип объявления<br> 
+<select selected="{{ .FilterData.Category}}" name="category"> 
+    <option>IT, интернет, телеком</option>
+    <option>Бытовые услуги</option>
+    <option>Деловые услуги</option>
+    <option>Искусство</option>
+    <option>Красота, здоровье</option>
+    <option>Курьерские поручения</option>
+    <option>Мастер на час</option>
+    <option>Няни, сиделки</option>
+    <option>Оборудование, производство</option>
+    <option>Обучение, курсы</option>
+    <option>Охрана, безопасность</option>
+   </select><br>   
+   <textarea name="comment"/>  
+</textarea> <br>
+<input type="submit" value="фильтруй"/> 
+{{ range .Ads }} 
+<h1>  <li><b><a href="/ad/{{ .ID }}">{{ .Title }}</a> </b><br></h1>  
+    Цена: {{ .Price}} 
+    Время выполнения: {{ .Time}}
+ 
+    </li> 
+{{else}} 
+    <li><b>нет объявлений</b></li>
+{{end}} 
+ 
+<!-- <h2 > <a href="/hello">ссылка</a></h2> -->
+{{ template "footer" .}} 
