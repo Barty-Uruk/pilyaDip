@@ -31,7 +31,7 @@ func Reg(c echo.Context) error {
 		return err
 	}
 	user.Password = string(encryptedPassword)
-	_, err = user.NewUser()
+	user, err = user.NewUser()
 	// password := c.FormValue("password")
 	// if err != nil {
 	// 	return c.JSON(http.StatusOK, fmt.Errorf("ошибка получения данных с формы,%s", err))

@@ -42,7 +42,6 @@ func CreateAd(c echo.Context) error {
 	if err != nil {
 		fmt.Println("error binding form date,", err)
 	}
-	fmt.Println("---------------", cookie.Value)
 	ad.UserID, _ = strconv.Atoi(cookie.Value)
 	newAd, err := ad.Create()
 	if err != nil {
